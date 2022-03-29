@@ -1,6 +1,4 @@
 from tkinter import *
-from tkinter import ttk
-from tab_control import TabControl
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -33,8 +31,8 @@ class Window:
         # С начальным положением:
         # x = WINDOW_X
         # y = WINDOW_Y
-        self.window.geometry(f"{SCREEN_WIDTH}x{SCREEN_HIGHT}+{WINDOW_X}+{WINDOW_Y}") 
-        self.tab_control = TabControl(self.window)
+        self.window.geometry(f"{SCREEN_WIDTH}x{SCREEN_HIGHT}+{WINDOW_X}+{WINDOW_Y}")
+        self.window["bg"] = "gray22"
 
     def main_loop(self):
         """
