@@ -1,4 +1,6 @@
+from cProfile import label
 from tkinter import *
+from turtle import bgcolor
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -33,7 +35,8 @@ class Window:
         # y = WINDOW_Y
         self.window.geometry(f"{SCREEN_WIDTH}x{SCREEN_HIGHT}+{WINDOW_X}+{WINDOW_Y}")
         self.window["bg"] = "gray22"
-
+        self.label = Label(text="Введите город:", fg="white", bg="gray22", font="Arial 14")
+        self.label.pack()
     def main_loop(self):
         """
         Главная функция обработки событий
