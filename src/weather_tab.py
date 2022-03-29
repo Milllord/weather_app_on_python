@@ -1,9 +1,9 @@
 from tkinter import *
 from window import Window
 
-class Tab(Window):
+class WeatherTab(Window):
     """
-    Класс вкладки
+    Класс вкладки с погодой
     """
     def __init__(self, title):
         """
