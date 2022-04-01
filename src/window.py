@@ -41,15 +41,12 @@ class Window:
  
         # Создание переменной под город
         city = StringVar()
+
+        # Создание поля ввода под погоду
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
         font="Arial 14", width=50, textvariable=city)
         self.entry_city.pack()
-        # Создаем стиль tkinter, передав в параметре окно
-        self.style = ttk.Style(self.window)
-        # Конфигурируем вкладки так, чтобы они отображались слева
-        self.style.configure('lefttab.TNotebook', tabposition='ws')
-        # Создаем "записную книжку" tkinter с вкладками слева
-        self.notebook = ttk.Notebook(self.window, style='lefttab.TNotebook')
+        
     def main_loop(self):
         """
         Главная функция обработки событий
