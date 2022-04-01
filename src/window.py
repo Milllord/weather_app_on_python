@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -33,25 +34,18 @@ class Window:
         # y = WINDOW_Y
         self.window.geometry(f"{SCREEN_WIDTH}x{SCREEN_HIGHT}+{WINDOW_X}+{WINDOW_Y}")
         self.window["bg"] = "gray22"
-<<<<<<< Updated upstream
         self.label = Label(text="Введите город:", fg="white", bg="gray22", font="Arial 14")
         self.label.pack()
         message = StringVar()
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
         font="Arial 14", width=50, textvariable=message)
-        
-
         self.entry_city.pack()
-=======
         # Создаем стиль tkinter, передав в параметре окно
         self.style = ttk.Style(self.window)
         # Конфигурируем вкладки так, чтобы они отображались слева
         self.style.configure('lefttab.TNotebook', tabposition='ws')
         # Создаем "записную книжку" tkinter с вкладками слева
         self.notebook = ttk.Notebook(self.window, style='lefttab.TNotebook')
-        self.input_city_label = Label(text="Введите город:", bg="gray22", fg="white", font="arial")
-        self.input_city_label.pack()
->>>>>>> Stashed changes
     def main_loop(self):
         """
         Главная функция обработки событий
