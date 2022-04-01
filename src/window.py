@@ -34,11 +34,15 @@ class Window:
         # y = WINDOW_Y
         self.window.geometry(f"{SCREEN_WIDTH}x{SCREEN_HIGHT}+{WINDOW_X}+{WINDOW_Y}")
         self.window["bg"] = "gray22"
+
+        # Текст приглашение ко вводу города
         self.label = Label(text="Введите город:", fg="white", bg="gray22", font="Arial 14")
         self.label.pack()
-        message = StringVar()
+ 
+        # Создание переменной под город
+        city = StringVar()
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
-        font="Arial 14", width=50, textvariable=message)
+        font="Arial 14", width=50, textvariable=city)
         self.entry_city.pack()
         # Создаем стиль tkinter, передав в параметре окно
         self.style = ttk.Style(self.window)
