@@ -1,3 +1,4 @@
+from ctypes import alignment
 from tkinter import *
 from tkinter import ttk
 
@@ -44,9 +45,9 @@ class Window:
 
         # Создание поля ввода под погоду
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
-        font="Arial 14", width=50, textvariable=city)
+        font="Arial 14", width=50, textvariable=city, justify=CENTER)
         self.entry_city.pack()
-        
+
     def main_loop(self):
         """
         Главная функция обработки событий
