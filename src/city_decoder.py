@@ -11,7 +11,6 @@ def decode_city(city):
     with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\api_keys.json") as f:
         d = json.load(f)
         API_key = d[json_key_open_weather]
-        print(API_key)
 
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name},&limit={limit}&appid={API_key}"
     
