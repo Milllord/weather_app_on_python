@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from city_decoder import decode_city
+from city_decoder import decode_city, get_cords
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -16,11 +16,15 @@ WINDOW_NAME = "Приложение погоды"
 class Window:
     def get_weather(self):
         # Получаем город
-        self.city = self.entry_city.get()
+        # self.city = self.entry_city.get()
         # Получаем координаты города и записываем их в json city_decoder.json
 
         # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
         # decode_city(self.entry_city)
+
+        # Получаем координаты введенного города
+        self.lon, self.lat = get_cords()
+        print(f"lon = {self.lon}\n lat = {self.lat}")
         # Получаем погоду по open_weather_map
         
 
