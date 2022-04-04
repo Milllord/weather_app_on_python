@@ -1,7 +1,7 @@
 import json
 import requests
 
-def create_url(city):
+def decode_city(city):
     json_key_open_weather = "Open_Weather_Map_API_key"
 
     city_name = city
