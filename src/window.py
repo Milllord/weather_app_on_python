@@ -1,6 +1,6 @@
-from ctypes import alignment
 from tkinter import *
 from tkinter import ttk
+from city_decoder import create_url
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -14,6 +14,9 @@ WINDOW_Y = 50
 WINDOW_NAME = "Приложение погоды"
 
 class Window:
+    def get_city_from_entry(self):
+        self.city = self.entry_city.get()
+        url = create_url(self.city)
     """
     Класс окна программы приложения погоды.
     """
@@ -41,15 +44,20 @@ class Window:
         self.label.pack()
  
         # Создание переменной под город
-        city = StringVar()
+        self.city = StringVar()
 
         # Создание поля ввода под погоду
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
-        font="Arial 14", width=50, textvariable=city, justify=CENTER)
+        font="Arial 14", width=50, textvariable=self.city, justify=CENTER)
 
+        
         # Запаковываем на окно
         self.entry_city.pack()
 
+        btn = Button(text="Click Me", background="#555", foreground="#ccc",
+             padx="20", pady="8", font="16", command=self.get_city_from_entry)
+        btn.pack()
+        
     def main_loop(self):
         """
         Главная функция обработки событий
