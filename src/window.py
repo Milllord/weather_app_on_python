@@ -46,6 +46,8 @@ class Window:
         # Создание поля ввода под погоду
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
         font="Arial 14", width=50, textvariable=city, justify=CENTER)
+
+        # Запаковываем на окно
         self.entry_city.pack()
 
     def main_loop(self):
