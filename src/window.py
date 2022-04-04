@@ -27,7 +27,7 @@ class Window:
         self.lon, self.lat = get_cords()
 
         # Получаем погоду
-        get_weather(self.lon, self.lat)
+        get_weather(self.city, self.lon, self.lat)
 
 
     """
