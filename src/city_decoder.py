@@ -17,6 +17,5 @@ def create_url(city):
     
     response = requests.get(url)
     data = response.json()
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\city_decoder.json") as f:
-        d = json.load(f)
-        f.write(data)
+    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\city_decoder.json", "w") as f:
+        json.dump(data, f)
