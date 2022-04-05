@@ -22,7 +22,7 @@ def get_open_weather_map_weather_from_json():
         d = json.load(f)
         humidity = d["main"]["humidity"]
         # Перевод температуры из фаренгейтов в градусы
-        temp = int((5/9)*(d["main"]["temp"]-32))
+        temp = int(int(d["main"]["temp"])-273)
         wind_speed = d["wind"]["speed"]
         weather_description = d["weather"][0]["description"]
         return humidity, temp, wind_speed, weather_description
@@ -37,35 +37,43 @@ def get_weather_bit_weather_from_json():
         return humidity, temp, wind_speed, weather_description
 
 class Window:
-    def show_weather(self):
+    def init_weather(self):
         self.label_weather_provider = Label(text="Open Weather Map", fg="#B0E0E6", bg="gray22", font="Arial 14")
         self.label_weather_provider.pack()
         self.labels_weather = []
         for i in range(len(self.weather_openweather)):
-            text1 = str(self.info[i]) + str(self.weather_openweather[i]) + str(self.units[i])
+            text1 = ""
             self.labels_weather.append(Label(text=text1, fg="white", bg="gray22", font="Arial 14"))
             self.labels_weather[i].pack()
+        self.label_weather_provider1 = Label(text="Weather Bit", fg="#B0E0E6", bg="gray22", font="Arial 14")
+        self.label_weather_provider1.pack()
+        self.labels_weather1 = []
+        for i in range(len(self.weather_openweather)):
+            self.labels_weather1.append(Label(text=text1, fg="white", bg="gray22", font="Arial 14"))
+            self.labels_weather1[i].pack()
+
+    def show_weather(self):
+        for i in range(len(self.weather_openweather)):
+            self.labels_weather[i].config(text=(str(self.info[i]) + str(self.weather_openweather[i]) + str(self.units[i])))
+        for i in range(len(self.weather_openweather)):
+            self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
 
     def get_weather(self):
         # Получаем город
         self.city = self.entry_city.get()
         # Получаем координаты города и записываем их в json city_decoder.json
 
-        # # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
-        # decode_city(self.city)
+        # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
+        decode_city(self.city)
 
-        # # Получаем координаты введенного города
-        # self.lon, self.lat = get_cords()
+        # Получаем координаты введенного города
+        self.lon, self.lat = get_cords()
 
-        # # Получаем погоду
-        # get_weather(self.lon, self.lat)
+        # Получаем погоду
+        get_weather(self.lon, self.lat)
 
-        # Получаем необходимые данные
-        self.weather_openweather = []
-        self.weather_weatherbit = []
         # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
-        self.info = ["Влажность: ", "Температура: ", "Скорость ветра: ", "Описание погоды: "]
-        self.units = [" %", " °C", " м/c", " "]
+        
         self.weather_openweather = get_open_weather_map_weather_from_json()
         self.weather_weatherbit = get_weather_bit_weather_from_json()
         # Отображаем на экране
@@ -80,6 +88,8 @@ class Window:
         Создает окно с константными параметрами
         Из данного файла выше
         """
+       
+        self.init_weather()
         # Создаем окно
         self.window = Tk()
         # Задаем название окна
@@ -110,6 +120,13 @@ class Window:
         btn = Button(text="Получить!", background="#555", foreground="#ccc",
              padx="20", pady="8", font="16", command=self.get_weather)
         btn.pack()
+
+         # Получаем необходимые данные
+        self.weather_openweather = []
+        self.weather_weatherbit = []
+
+        self.info = ["Влажность: ", "Температура: ", "Скорость ветра: ", "Описание погоды: "]
+        self.units = [" %", " °C", " м/c", " "]
         
     def main_loop(self):
         """
