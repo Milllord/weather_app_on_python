@@ -38,11 +38,12 @@ def get_weather_bit_weather_from_json():
 
 class Window:
     def show_weather(self):
-        self.label_weather_provider = Label(text="Open Weather Map", fg="white", bg="gray22", font="Arial 14")
+        self.label_weather_provider = Label(text="Open Weather Map", fg="#B0E0E6", bg="gray22", font="Arial 14")
         self.label_weather_provider.pack()
         self.labels_weather = []
         for i in range(len(self.weather_openweather)):
-            self.labels_weather.append(Label(text=self.weather_openweather[i], fg="white", bg="gray22", font="Arial 14"))
+            text1 = str(self.info[i]) + str(self.weather_openweather[i]) + str(self.units[i])
+            self.labels_weather.append(Label(text=text1, fg="white", bg="gray22", font="Arial 14"))
             self.labels_weather[i].pack()
 
     def get_weather(self):
@@ -63,8 +64,8 @@ class Window:
         self.weather_openweather = []
         self.weather_weatherbit = []
         # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
-        self.info = ["Влажность: ", "Температура: ", "Скорость ветра: ", "Описание погоды"]
-        self.units = [""]
+        self.info = ["Влажность: ", "Температура: ", "Скорость ветра: ", "Описание погоды: "]
+        self.units = [" %", " °C", " м/c", " "]
         self.weather_openweather = get_open_weather_map_weather_from_json()
         self.weather_weatherbit = get_weather_bit_weather_from_json()
         # Отображаем на экране
