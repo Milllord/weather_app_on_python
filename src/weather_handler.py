@@ -10,4 +10,4 @@ def get_weather(lon, lat):
     # Запускаем работу
     t1.start()
     t2.start()
-   
+    
