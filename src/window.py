@@ -1,3 +1,4 @@
+from cgitb import text
 from select import select
 from tkinter import *
 from city_decoder import decode_city, get_cords
@@ -20,6 +21,7 @@ def get_open_weather_map_weather_from_json():
     with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\open_weather_map.json") as f:
         d = json.load(f)
         humidity = d["main"]["humidity"]
+        # Перевод температуры из фаренгейтов в градусы
         temp = int((5/9)*(d["main"]["temp"]-32))
         wind_speed = d["wind"]["speed"]
         weather_description = d["weather"][0]["description"]
@@ -34,11 +36,15 @@ def get_weather_bit_weather_from_json():
         weather_description = d["data"][0]["weather"]["description"]
         return humidity, temp, wind_speed, weather_description
 
-def show_weather():
-            print(get_open_weather_map_weather_from_json())
-            print(get_weather_bit_weather_from_json())
-
 class Window:
+    def show_weather(self):
+        self.label_weather_provider = Label(text="Open Weather Map", fg="white", bg="gray22", font="Arial 14")
+        self.label_weather_provider.pack()
+        self.labels_weather = []
+        for i in range(len(self.weather_openweather)):
+            self.labels_weather.append(Label(text=self.weather_openweather[i], fg="white", bg="gray22", font="Arial 14"))
+            self.labels_weather[i].pack()
+
     def get_weather(self):
         # Получаем город
         self.city = self.entry_city.get()
@@ -53,7 +59,16 @@ class Window:
         # # Получаем погоду
         # get_weather(self.lon, self.lat)
 
-        show_weather()
+        # Получаем необходимые данные
+        self.weather_openweather = []
+        self.weather_weatherbit = []
+        # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
+        self.info = ["Влажность: ", "Температура: ", "Скорость ветра: ", "Описание погоды"]
+        self.units = [""]
+        self.weather_openweather = get_open_weather_map_weather_from_json()
+        self.weather_weatherbit = get_weather_bit_weather_from_json()
+        # Отображаем на экране
+        self.show_weather()
 
     """
     Класс окна программы приложения погоды.
@@ -87,7 +102,6 @@ class Window:
         # Создание поля ввода под погоду
         self.entry_city = Entry(self.window, fg="white", bg="gray22", 
         font="Arial 14", width=50, textvariable=self.city, justify=CENTER)
-
         
         # Запаковываем на окно
         self.entry_city.pack()
