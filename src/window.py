@@ -2,18 +2,20 @@ from tkinter import *
 from city_decoder import decode_city, get_cords
 from weather_handler import get_weather
 import json
-import time
 
 # Ширина экрана
-SCREEN_WIDTH = 1000
+SCREEN_WIDTH = 700
 # Высота экрана
-SCREEN_HIGHT = 600
+SCREEN_HIGHT = 400
 # Положение окна при создании по оси x
 WINDOW_X = 150
 # Положение окна при создании по оси y
 WINDOW_Y = 50
 # Название окна
 WINDOW_NAME = "Приложение погоды"
+
+# def timer_start():
+
 
 def get_open_weather_map_weather_from_json():
     with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\open_weather_map.json") as f:
@@ -57,10 +59,6 @@ class Window:
         for i in range(len(self.weather_weatherbit)):
             self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
 
-    def time_is_gone(self):
-        time.sleep(self.hour)
-        return True
-
     def update_and_show_weather_of_the_window(self):
         # Получаем город
         self.city = self.entry_city.get()
@@ -84,12 +82,7 @@ class Window:
 
     def get_weather(self):
         self.update_and_show_weather_of_the_window()
-        now = time.time()
-        while True:
-            after = time.time()
-            if after - now > self.hour:
-                get_weather()
-
+            
     """
     Класс окна программы приложения погоды.
     """
@@ -99,7 +92,6 @@ class Window:
         Создает окно с константными параметрами
         Из данного файла выше
         """
-        self.hour = 3600
         # Создаем окно
         self.window = Tk()
         # Задаем название окна
