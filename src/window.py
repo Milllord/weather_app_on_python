@@ -37,27 +37,6 @@ def get_weather_bit_weather_from_json():
         return humidity, temp, wind_speed, weather_description
 
 class Window:
-    # def init_weather(self):
-    #     self.label_weather_provider = Label(text="Open Weather Map", fg="#B0E0E6", bg="gray22", font="Arial 14")
-    #     self.label_weather_provider.pack()
-    #     self.labels_weather = []
-    #     for i in range(len(self.weather_openweather)):
-    #         text1 = ""
-    #         self.labels_weather.append(Label(text=text1, fg="white", bg="gray22", font="Arial 14"))
-    #         self.labels_weather[i].pack()
-    #     self.label_weather_provider1 = Label(text="Weather Bit", fg="#B0E0E6", bg="gray22", font="Arial 14")
-    #     self.label_weather_provider1.pack()
-    #     self.labels_weather1 = []
-    #     for i in range(len(self.weather_openweather)):
-    #         self.labels_weather1.append(Label(text=text1, fg="white", bg="gray22", font="Arial 14"))
-    #         self.labels_weather1[i].pack()
-
-    # def show_weather(self):
-    #     for i in range(len(self.weather_openweather)):
-    #         self.labels_weather[i].config(text=(str(self.info[i]) + str(self.weather_openweather[i]) + str(self.units[i])))
-    #     for i in range(len(self.weather_openweather)):
-    #         self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
-
     def init_weather(self):
         self.label_weather_provider = Label(text="Open Weather Map", fg="#B0E0E6", bg="gray22", font="Arial 14")
         self.label_weather_provider.pack()
@@ -73,6 +52,12 @@ class Window:
             text1 = (str(self.info[i]) + str(self.units[i]))
             self.labels_weather1.append(Label(text=text1, fg="white", bg="gray22", font="Arial 14"))
             self.labels_weather1[i].pack()
+
+    def show_weather(self):
+        for i in range(len(self.weather_openweather)):
+            self.labels_weather[i].config(text=(str(self.info[i]) + str(self.weather_openweather[i]) + str(self.units[i])))
+        for i in range(len(self.weather_weatherbit)):
+            self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
 
     def get_weather(self):
         # Получаем город
@@ -92,6 +77,8 @@ class Window:
         
         self.weather_openweather = get_open_weather_map_weather_from_json()
         self.weather_weatherbit = get_weather_bit_weather_from_json()
+
+        self.show_weather()
        
 
     """
