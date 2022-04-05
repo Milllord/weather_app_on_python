@@ -57,30 +57,31 @@ class Window:
         for i in range(len(self.weather_weatherbit)):
             self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
 
+    def update_and_show_weather_of_the_window(self):
+        # Получаем город
+        self.city = self.entry_city.get()
+        # Получаем координаты города и записываем их в json city_decoder.json
+
+        # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
+        decode_city(self.city)
+
+        # Получаем координаты введенного города
+        self.lon, self.lat = get_cords()
+
+        # Получаем погоду
+        get_weather(self.lon, self.lat)
+
+        # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
+        
+        self.weather_openweather = get_open_weather_map_weather_from_json()
+        self.weather_weatherbit = get_weather_bit_weather_from_json()
+
+        self.show_weather()
+
     def get_weather(self):
-        hour = 3600
+        self.update_and_show_weather_of_the_window()
+       
 
-        while(True):
-            # Получаем город
-            self.city = self.entry_city.get()
-            # Получаем координаты города и записываем их в json city_decoder.json
-
-            # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
-            decode_city(self.city)
-
-            # Получаем координаты введенного города
-            self.lon, self.lat = get_cords()
-
-            # Получаем погоду
-            get_weather(self.lon, self.lat)
-
-            # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
-            
-            self.weather_openweather = get_open_weather_map_weather_from_json()
-            self.weather_weatherbit = get_weather_bit_weather_from_json()
-
-            self.show_weather()
-            time.sleep(hour)
     """
     Класс окна программы приложения погоды.
     """
@@ -90,6 +91,7 @@ class Window:
         Создает окно с константными параметрами
         Из данного файла выше
         """
+        self.hour = 3600
         # Создаем окно
         self.window = Tk()
         # Задаем название окна
