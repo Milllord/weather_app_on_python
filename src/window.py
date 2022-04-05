@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from city_decoder import decode_city, get_cords
 from weather_handler import get_weather
+import json
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -29,6 +30,26 @@ class Window:
         # Получаем погоду
         get_weather(self.lon, self.lat)
 
+    def get_open_weather_map_weather_from_json():
+        with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\open_weather_map.json") as f:
+            d = json.load(f)
+            humidity = d["humidity"]
+            temp = int((5/9)*(d["temp"]-32))
+            wind_speed = d["wind"]["speed"]
+            weather_description = d["weather"]["description"]
+            return humidity, temp, wind_speed, weather_description
+    
+    def get_weather_bit_weather_from_json():
+        with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\weather_bit.json") as f:
+            d = json.load(f)
+            humidity = d["rh"]
+            temp = int(d["temp"])
+            wind_speed = d["wind_spd"]
+            weather_description = d["weather"]["description"]
+            return humidity, temp, wind_speed, weather_description
+
+    def show_weather():
+        pass
 
     """
     Класс окна программы приложения погоды.
