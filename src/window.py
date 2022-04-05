@@ -17,17 +17,17 @@ WINDOW_NAME = "Приложение погоды"
 class Window:
     def get_weather(self):
         # Получаем город
-        # self.city = self.entry_city.get()
+        self.city = self.entry_city.get()
         # Получаем координаты города и записываем их в json city_decoder.json
 
         # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
-        # decode_city(self.entry_city)
+        decode_city(self.city)
 
         # Получаем координаты введенного города
         self.lon, self.lat = get_cords()
 
         # Получаем погоду
-        get_weather(self.city, self.lon, self.lat)
+        get_weather(self.lon, self.lat)
 
 
     """
