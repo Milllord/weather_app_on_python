@@ -57,6 +57,10 @@ class Window:
         for i in range(len(self.weather_weatherbit)):
             self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
 
+    def time_is_gone(self):
+        time.sleep(self.hour)
+        return True
+
     def update_and_show_weather_of_the_window(self):
         # Получаем город
         self.city = self.entry_city.get()
@@ -80,7 +84,11 @@ class Window:
 
     def get_weather(self):
         self.update_and_show_weather_of_the_window()
-       
+        now = time.time()
+        while True:
+            after = time.time()
+            if after - now > self.hour:
+                get_weather()
 
     """
     Класс окна программы приложения погоды.
