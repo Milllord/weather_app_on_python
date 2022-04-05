@@ -1,10 +1,8 @@
-from cgitb import text
-from select import select
 from tkinter import *
 from city_decoder import decode_city, get_cords
-from open_weather_map import get_open_weather_map_weather
 from weather_handler import get_weather
 import json
+import time
 
 # Ширина экрана
 SCREEN_WIDTH = 1000
@@ -60,27 +58,29 @@ class Window:
             self.labels_weather1[i].config(text=(str(self.info[i]) + str(self.weather_weatherbit[i]) + str(self.units[i])))
 
     def get_weather(self):
-        # Получаем город
-        self.city = self.entry_city.get()
-        # Получаем координаты города и записываем их в json city_decoder.json
+        hour = 3600
 
-        # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
-        decode_city(self.city)
+        while(True):
+            # Получаем город
+            self.city = self.entry_city.get()
+            # Получаем координаты города и записываем их в json city_decoder.json
 
-        # Получаем координаты введенного города
-        self.lon, self.lat = get_cords()
+            # РАСКОММЕНТИРОВАТЬ СТРОКУ НИЖЕ!
+            decode_city(self.city)
 
-        # Получаем погоду
-        get_weather(self.lon, self.lat)
+            # Получаем координаты введенного города
+            self.lon, self.lat = get_cords()
 
-        # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
-        
-        self.weather_openweather = get_open_weather_map_weather_from_json()
-        self.weather_weatherbit = get_weather_bit_weather_from_json()
+            # Получаем погоду
+            get_weather(self.lon, self.lat)
 
-        self.show_weather()
-       
+            # Влажность, температура в цельсиях, скорость ветра в м/c, описание погоды
+            
+            self.weather_openweather = get_open_weather_map_weather_from_json()
+            self.weather_weatherbit = get_weather_bit_weather_from_json()
 
+            self.show_weather()
+            time.sleep(hour)
     """
     Класс окна программы приложения погоды.
     """
