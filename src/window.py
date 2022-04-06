@@ -14,8 +14,6 @@ WINDOW_Y = 50
 # Название окна
 WINDOW_NAME = "Приложение погоды"
 
-# def timer_start():
-
 
 def get_open_weather_map_weather_from_json():
     with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\open_weather_map.json") as f:
@@ -82,6 +80,8 @@ class Window:
 
     def get_weather(self):
         self.update_and_show_weather_of_the_window()
+        # while True:
+        #     self.window.after(3600, self.update_and_show_weather_of_the_window())
             
     """
     Класс окна программы приложения погоды.
