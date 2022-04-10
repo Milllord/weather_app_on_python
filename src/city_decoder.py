@@ -8,7 +8,7 @@ def decode_city(city):
 
     limit = 1
 
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\api_keys.json") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\api_keys.json") as f:
         d = json.load(f)
         API_key = d[json_key_open_weather]
 
@@ -16,10 +16,10 @@ def decode_city(city):
     
     response = requests.get(url)
     data = response.json()
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\city_decoder.json", "w") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\city_decoder.json", "w") as f:
         json.dump(data, f)
 
 def get_cords():
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\city_decoder.json", "r") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\city_decoder.json", "r") as f:
         d = json.load(f)
         return d[0]["lon"], d[0]["lat"]

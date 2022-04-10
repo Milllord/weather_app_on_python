@@ -2,6 +2,8 @@ from tkinter import *
 from city_decoder import decode_city, get_cords
 from weather_handler import get_weather
 import json
+from threading import *
+import time
 
 # Ширина экрана
 SCREEN_WIDTH = 700
@@ -16,7 +18,7 @@ WINDOW_NAME = "Приложение погоды"
 
 
 def get_open_weather_map_weather_from_json():
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\open_weather_map.json") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\open_weather_map.json") as f:
         d = json.load(f)
         humidity = d["main"]["humidity"]
         # Перевод температуры из фаренгейтов в градусы
@@ -26,7 +28,7 @@ def get_open_weather_map_weather_from_json():
         return humidity, temp, wind_speed, weather_description
     
 def get_weather_bit_weather_from_json():
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\weather_bit.json") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\weather_bit.json") as f:
         d = json.load(f)
         humidity = d["data"][0]["rh"]
         temp = int(d["data"][0]["temp"])
@@ -78,11 +80,18 @@ class Window:
 
         self.show_weather()
 
-    def get_weather(self):
+    def update_and_show_weather_of_the_window_after_delay(self, delay):
+        time.sleep(delay)
         self.update_and_show_weather_of_the_window()
-        # while True:
-        #     self.window.after(3600, self.update_and_show_weather_of_the_window())
-            
+
+
+    def get_weather(self):
+        tread1 = Thread(target=self.update_and_show_weather_of_the_window())
+        tread2 = Thread(target=self.update_and_show_weather_of_the_window_after_delay(3600))
+        while True:
+            tread1.start()
+            tread2.start()
+ 
     """
     Класс окна программы приложения погоды.
     """

@@ -10,7 +10,7 @@ def get_open_weather_map_weather(lon, lat):
     lon - широта
     lat - долгота
     """
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\api_keys.json") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\api_keys.json") as f:
         d = json.load(f)
         json_key_open_weather = "Open_Weather_Map_API_key"
         API_key = d[json_key_open_weather]
@@ -19,5 +19,5 @@ def get_open_weather_map_weather(lon, lat):
 
     response = requests.get(url)
     data = response.json()
-    with open("C:\\Users\\L0ll1p0p\\AppData\\Local\\GitHubDesktop\\app-2.9.12\\weather_app_on_python\\src\\open_weather_map.json", "w") as f:
+    with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\open_weather_map.json", "w") as f:
         json.dump(data, f)
