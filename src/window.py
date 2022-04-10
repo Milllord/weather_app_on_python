@@ -21,7 +21,7 @@ def get_open_weather_map_weather_from_json():
     with open("C:\\Users\\Max_Solokhin\\Documents\\GitHub\\weather_app_on_python\\src\\open_weather_map.json") as f:
         d = json.load(f)
         humidity = d["main"]["humidity"]
-        # Перевод температуры из фаренгейтов в градусы
+        # Перевод температуры из кельвинах в градусы
         temp = int(int(d["main"]["temp"])-273)
         wind_speed = d["wind"]["speed"]
         weather_description = d["weather"][0]["description"]
