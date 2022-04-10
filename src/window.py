@@ -2,8 +2,8 @@ from tkinter import *
 from city_decoder import decode_city, get_cords
 from weather_handler import get_weather
 import json
-from threading import *
-import time
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 # Ширина экрана
 SCREEN_WIDTH = 700
@@ -80,18 +80,15 @@ class Window:
 
         self.show_weather()
 
-    def update_and_show_weather_of_the_window_after_delay(self, delay):
-        time.sleep(delay)
+    def callback_trigger(self):
+        if datetime.now() > self.update_time:
+            self.update_and_show_weather_of_the_window()
+            self.update_time = datetime.now() + relativedelta(seconds=self.update_gap)
+        self.window.after(3600, self.callback_trigger)
+           
+    def get_weather(self):
         self.update_and_show_weather_of_the_window()
 
-
-    def get_weather(self):
-        tread1 = Thread(target=self.update_and_show_weather_of_the_window())
-        tread2 = Thread(target=self.update_and_show_weather_of_the_window_after_delay(3600))
-        while True:
-            tread1.start()
-            tread2.start()
- 
     """
     Класс окна программы приложения погоды.
     """
@@ -118,6 +115,11 @@ class Window:
         self.label = Label(text="Введите город:", fg="white", bg="gray22", font="Arial 14")
         self.label.pack()
  
+        self.update_gap = 3600
+        self.update_time = datetime.now() + relativedelta(seconds=self.update_gap)
+
+        self.window.after(3600, self.callback_trigger)
+
         # Создание переменной под город
         self.city = StringVar()
 
