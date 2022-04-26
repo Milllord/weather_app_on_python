@@ -1,2 +1,3 @@
-# weather_app_on_python
-Weather application on python TK and request library.
+Солохин 
+0-20-ИВТ-1-ПО-Б
+Тема: прикладное приложение погоды
